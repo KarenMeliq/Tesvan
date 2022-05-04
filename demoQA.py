@@ -1,20 +1,20 @@
 import time
 import unittest
-
 from selenium import webdriver
 
 
-class LoginTest(unittest.TestCase):
-    chrome_path = "C:\\Users\\User\\Desktop\\chromedriver.exe"
+class TestInputFields(unittest.TestCase):
+    chrome_path = "./chromedriver.exe"
     target_site = 'https://demoqa.com/text-box'
-    def setUp(self):
 
+    def test_beforeAll(self):
         self.driver = webdriver.Chrome(self.chrome_path)
-
-    def test_login_valid_credentials(self):
         driver = self.driver
         driver.get(self.target_site)
+
+    def test_target_site(self):
         time.sleep(5)
+        driver = self.driver
         self.assertIn('ToolsQA', driver.title)
 
         user_name = "test_user"
@@ -39,7 +39,7 @@ class LoginTest(unittest.TestCase):
         time.sleep(50)
         self.assertIn("https://demoqa.com/text-box",driver.current_url)
 
-    def tearDown(self):
+    def afterAll(self):
         self.driver.close()
 
     if __name__ == "__main__":
