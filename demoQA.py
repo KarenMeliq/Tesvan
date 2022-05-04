@@ -27,7 +27,6 @@ class TestInputFields(unittest.TestCase):
         current_address_field = driver.find_element_by_id("currentAddress")
         permanent_address_field = driver.find_element_by_id("permanentAddress")
         submit_btn = driver.find_element_by_id("submit")
-        output_result = driver.find_element_by_id("output")
 
         time.sleep(3)
         user_name_field.send_keys(user_name)
