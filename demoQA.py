@@ -5,39 +5,42 @@ from selenium import webdriver
 
 
 class LoginTest(unittest.TestCase):
-
+    chrome_path = "C:\\Users\\User\\Desktop\\chromedriver.exe"
+    target_site = 'https://demoqa.com/text-box'
     def setUp(self):
-        self.driver = webdriver.Chrome("C:\\Users\\User\\Desktop\\chromedriver.exe")
+
+        self.driver = webdriver.Chrome(self.chrome_path)
 
     def test_login_valid_credentials(self):
         driver = self.driver
-        driver.get('https://demoqa.com/text-box')
+        driver.get(self.target_site)
         time.sleep(5)
-        self.assertIn("ToolsQA", driver.title)
+        self.assertIn('ToolsQA', driver.title)
 
-    user_name = "test_user"
-    email = "testName@gmail.com"
+        user_name = "test_user"
+        email = "testName@gmail.com"
+        current_address = "мои адрес не дом и не улица ..."
+        permanent_address = "мои адрес советский союз ... "
 
-    user_name_field = driver.find_element("userName")
-    email_field = driver.find_element("userEmail")
-    currentAddress_field = driver.find_element("currentAddress")
-    permanentAddress_field = driver.find_element("permanentAddress")
-    submit_btn = driver.find_element("submit")
+        user_name_field = driver.find_element_by_id("userName")
+        email_field = driver.find_element_by_id("userEmail")
+        current_address_field = driver.find_element_by_id("currentAddress")
+        permanent_address_field = driver.find_element_by_id("permanentAddress")
+        submit_btn = driver.find_element_by_id("submit")
+        output_result = driver.find_element_by_id("output")
 
-    time.sleep(3)
-    user_name_field.send_keys(user_name)
-    email_field.send_keys(email)
-    currentAddress_field.send_keys("test address ...")
-    permanentAddress_field.send_keys("test address1 ... ")
-    time.sleep(1)
-    submit_btn.click()
-    time.sleep(2)
-    # self.assertIn(" ", driver.current_url)
+        time.sleep(3)
+        user_name_field.send_keys(user_name)
+        email_field.send_keys(email)
+        current_address_field.send_keys(current_address)
+        permanent_address_field.send_keys(permanent_address)
+        time.sleep(1)
+        submit_btn.click()
+        time.sleep(50)
+        self.assertIn("https://demoqa.com/text-box",driver.current_url)
 
+    def tearDown(self):
+        self.driver.close()
 
-def tearDown(self):
-    self.driver.close()
-
-
-if __name__ == "__main__":
-    unittest.main()
+    if __name__ == "__main__":
+        unittest.main()
